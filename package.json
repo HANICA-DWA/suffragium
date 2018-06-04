@@ -10,7 +10,8 @@
     "dev:debug": "DEBUG=*,-nodemon*,-send*, npm run dev",
     "dev:debug:socket": "DEBUG=socket.io* npm run dev",
     "build:js": "browserify -t brfs src/app/main.js -o client/bundle.js",
-    "build:js:watch": "watchify -t brfs src/app/main.js -o client/bundle.js -v"
+    "build:js:watch": "watchify -t brfs src/app/main.js -o client/bundle.js -v",
+    "e2e": "jest --testMatch=\"**/*.e2e.js\""
   },
   "keywords": [
     "poll",
@@ -42,11 +43,10 @@
     "angular-route": "^1.6.6",
     "bower": "^1.8.4",
     "brfs": "^1.4.3",
-    "chai": "^4.1.2",
-    "mocha": "^4.0.1",
+    "jest": "^23.1.0",
     "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
-    "puppeteer": "^0.12.0",
+    "puppeteer": "^1.4.0",
     "watchify": "^3.9.0"
   }
 }
