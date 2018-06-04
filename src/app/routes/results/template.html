@@ -1,0 +1,97 @@
+<!-- logged -->
+<div ng-if="loggedUser" class="navbar-fixed">
+    <nav id="nav_f" class="default_color" role="navigation">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a ng-href="/" id="logo-container" class="brand-logo">Suffragium</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#!/username/{{idUser}}">Account</a></li>
+                    <li><a ng-click="logout()" class="logout-click">Logout</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="#!/username/{{idUser}}">Account</a></li>
+                    <li><a ng-click="logout()" class="logout-click">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- not logged -->
+<div ng-if="!loggedUser" class="navbar-fixed">
+    <nav id="nav_f" class="default_color" role="navigation">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a ng-href="/" id="logo-container" class="brand-logo">Suffragium</a>
+                <a data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a ng-href="#!/register">Register</a></li>
+                    <li><a ng-href="#!/login">Login</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="#!/register">Register</a></li>
+                    <li><a href="#!/login">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container-results">
+    <div class="row">
+        <div class="row col s11 l4 offset-l1 container-question">
+            <p class="title-results-style title-size">{{question}}</p>
+            <!-- begin checkbox option -->
+            <div ng-if="allowMoreThanOne" class="container space" ng-repeat="option in options" id="{{option._id}}">
+                <input type="checkbox" id="option{{$index}}" ng-model="option.selected" ng-true-value="'{{option._id}}'" ng-false-value="false" ng-disabled="!status">
+                <label for="option{{$index}}">{{option.option}}</label>
+            </div>
+            <!-- end checkbox option -->
+             <!-- begin radio option -->
+            <div ng-if="!allowMoreThanOne" class="container space" ng-repeat="option in options" id="{{option._id}}">
+                <input class="with-gap" type="radio" id="option{{$index}}" name="radio" ng-model="changedVal" value="{{$index}}" ng-checked="false" ng-click="getVal(option._id)" ng-disabled="!status">
+                <label for="option{{$index}}">{{option.option}}</label>
+            </div>
+            <!-- end radio option -->
+            <button ng-if="status" class="btn voted" type="submit" name="action" ng-click="vote(options)">Vote
+                <i class="material-icons right">send</i>
+            </button>
+            <div class="title-results-style">
+                <p class="info-results">Total Votes: {{totalVotes}}</p>
+                <p>Status: {{status ? 'Open' : 'Closed'}}</p>
+            </div>
+        </div>
+        <div class="col s11 l6 row container-graph">
+            <table class="bordered" >
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Votes</th>
+                        <th>Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="option in tableOptions">
+                        <td>{{option.name}}</td>
+                        <td>{{option.votes}}</td>
+                        <td>{{optio.percentStr}}</td>
+                    </tr>
+                </tbody>
+            </table>             <canvas class="canvas-graph-style" height="120" width="230" id="myChart"></canvas>
+            <div class="input-field col s6">
+                <select ng-change="changeChart(chartType)" ng-model="chartType">
+                  <option value="" disabled>Choose Chart</option>
+                  <option value="bar">Bar Chart</option>
+                  <option value="horizontalBar">Horitzontal Bar Chart</option>
+                  <option value="line">Line Chart</option>
+                  <option value="doughnut">Doughnut Chart</option>
+                  <option value="pie">Pie Chart</option>
+                </select>
+            </div>
+            <div class="col offset-s3 s3 save-button">
+                <button class="btn voted" ng-click="saveChart()" name="action" onclick="Materialize.toast('Saved!', 1000)">Save
+                    <i class="material-icons right">file_download</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
