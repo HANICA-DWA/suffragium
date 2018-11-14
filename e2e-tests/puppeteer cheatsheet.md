@@ -11,11 +11,11 @@ let theBrowser = await puppeteer.launch({ options })
                                   //    steps, and see what is happening
                 timeout:  300000, // milliseconds
 */
-```    
+```
 Create an empty tab in the browser:
 ```js    
 let thePage = await theBrowser.newPage()
-```    
+```
 #### Shutting down
 ```js
 await thePage.close()
@@ -36,11 +36,11 @@ let response = await thePage.goto( url )
 ```
 #### Other navigation:    
 ```js    
-await page.goBack()     // can take same options as goto(), can return a Response-object
-await page.goForward()  // can take same options as goto(), can return a Response-object
+await thePage.goBack()     // can take same options as goto(), can return a Response-object
+await thePage.goForward()  // can take same options as goto(), can return a Response-object
 
-await page.setContent( html_string )
-```  
+await thePage.setContent( html_string )
+```
 #### After navigating, wait for content to be loaded:  
 ```js
 await thePage.waitFor( cssSelector )  // wait for element to appear in page.
@@ -50,7 +50,7 @@ await thePage.waitFor( cssSelector, {options} )
       //    hidden:  true/false
       //    timeout: number      // ms
 await thePage.waitFor( number )         // wait milliseconds.
-```    
+```
 
 ## Interacting with the webpage
 ```js    
@@ -80,21 +80,21 @@ await theElement.type( text )
 await thePage.focus( cssSelector )
 await theElement.focus(); // elements can be found using '$' and '$$' methods (see below)
 
-await page.keyboard.type('Hello World!');
-await page.keyboard.press('ArrowLeft');  // 'Backspace', 'Tab', 'Enter', 'KeyA'-'KeyZ', 'F1', 'Shift'
+await thePage.keyboard.type('Hello World!');
+await thePage.keyboard.press('ArrowLeft');  // 'Backspace', 'Tab', 'Enter', 'KeyA'-'KeyZ', 'F1', 'Shift'
 
-await page.keyboard.down('Shift');   // combination to press 'A'
-await page.keyboard.press('KeyA');
-await page.keyboard.up('Shift');
+await thePage.keyboard.down('Shift');   // combination to press 'A'
+await thePage.keyboard.press('KeyA');
+await thePage.keyboard.up('Shift');
 
-await page.mouse.click(x, y);
-await page.mouse.move(x, y); // opt. third param: { steps: 6 } makes 6 mouse-moves for intermediate steps.
-await page.mouse.down(); // optional param: { button: 'left' } or 'middle' or 'right.
-await page.mouse.up();   // optional param: { button: 'left' } or 'middle' or 'right.
+await thePage.mouse.click(x, y);
+await thePage.mouse.move(x, y); // opt. third param: { steps: 6 } makes 6 mouse-moves for intermediate steps.
+await thePage.mouse.down(); // optional param: { button: 'left' } or 'middle' or 'right.
+await thePage.mouse.up();   // optional param: { button: 'left' } or 'middle' or 'right.
 
 await thePage.select( cssSelector, value ) // select option for <select> element
 await theInputElement.uploadFile(...filePaths)
-```    
+```
 
 ## Getting info from browser
 
@@ -103,11 +103,11 @@ await theInputElement.uploadFile(...filePaths)
 let theElement = await thePage.$( css_selector )  
       // like querySelector. The result is not a normal DOM node,
       // but a reference to a DOM node in the browser.
-let theElement = await thePage.$$( css_selector )
+let manyElements = await thePage.$$( css_selector )
       // like querySelectorAll. Returns multiple results.
 
-let anotherElement = theElement.$( css_selector )  // search below this element
-let anotherElement = theElement.$$( css_selector ) // search for multiple, below this element
+let subElement      = theElement.$( css_selector )  // search below this element
+let manySubElements = theElement.$$( css_selector ) // search for multiple, below this element
 
 let theTitle = await thePage.title()
 ```
@@ -124,7 +124,7 @@ Copy this function to your own script.
 //           source:  a string containing a CSS selector pointing to the element.
 //           page:    the Puppeteer page (e.g. from browser.newPage()) that contains the selector.
 async function getPropValueFromSelector( prop, source, page ) {
-  const theElement = await page.$(source)
+  const theElement = await thePage.$(source)
   const theProp = await theElement.getProperty(prop)
   return theProp.jsonValue()
 }
