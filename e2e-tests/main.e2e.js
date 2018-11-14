@@ -39,10 +39,16 @@ describe(`Suffragium`,()=>{
   	expect(theTitle).toBe(`Suffragium`)
   })
 
-  test("can login at A", async ()=>{
-    await pageA.type("input#email","qq@qq.qq")
-    await pageA.type("input#password","qqqqqq")
-    const loginButton = await pageA.$("form[name=\"register\"] button")
+  // The next tests assume that users "qq@qq.qq" and "ww@ww.ww"
+  // are already in the database. Also, a question with "Star Wars"
+  // in the title should be in the database.
+  // A professional E2E-test should create these users, either 
+  // through:
+  // * the UI (in that case, it becomes another E2E-test, for 
+  //          registering users), or
+  // * creating the users in the DB itself through the MongoDB-
+  //          driver or Mongoose. 
+
   test(`can login at A`, async ()=>{
     await pageA.type(`input#email`, `qq@qq.qq`)
     await pageA.type(`input#password`,`qqqqqq`)
