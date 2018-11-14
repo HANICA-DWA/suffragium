@@ -19,7 +19,8 @@ describe(`Suffragium`,()=>{
     // browserB = await puppeteer.launch({
 	  //   headless: false,
     //   slowMo: 20,
-    //   args: [`--window-size=900,800`,`--window-position=550,0`]
+    //   args: [`--window-size=1100,800`,`--window-position=350,0`],
+    //   defaultViewport: null
     // })
     // pageB = await browserB.newPage()
 
