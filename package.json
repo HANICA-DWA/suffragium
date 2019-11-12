@@ -5,13 +5,13 @@
   "main": "app.js",
   "scripts": {
     "prestart": "npm install bower install",
-    "start": "node server/app.js",
     "dev": "nodemon server/app.js",
     "dev:debug": "DEBUG=*,-nodemon*,-send*, npm run dev",
     "dev:debug:socket": "DEBUG=socket.io* npm run dev",
-    "build:js": "browserify -t brfs src/app/main.js -o client/bundle.js",
     "build:js:watch": "watchify -t brfs src/app/main.js -o client/bundle.js -v",
-    "e2e": "jest --testMatch=\"**/*.e2e.js\""
+    "build:js": "browserify -t brfs src/app/main.js -o client/bundle.js",
+    "e2e": "jest --testMatch=\"**/*.e2e.js\"",
+    "start": "node server/app.js"
   },
   "keywords": [
     "poll",
