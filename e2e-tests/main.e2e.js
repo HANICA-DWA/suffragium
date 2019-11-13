@@ -11,7 +11,7 @@ describe(`Suffragium`,()=>{
     // create two browsers
     browserA = await puppeteer.launch({
 	    headless: false,
-      slowMo: 20,
+      slowMo: 200,
       args: [`--window-size=700,800`,`--window-position=0,0`]
     })
     pageA = await browserA.newPage()
@@ -42,7 +42,7 @@ describe(`Suffragium`,()=>{
 
   // The next tests assume that users "qq@qq.qq" and "ww@ww.ww"
   // are already in the database. Also, a question with "Star Wars"
-  // in the title should be in the database.
+  // in the title must have been created by user "qq@qq.qq".
   // A professional E2E-test should create these users, either 
   // through:
   // * the UI (in that case, it becomes another E2E-test, for 
@@ -66,7 +66,7 @@ describe(`Suffragium`,()=>{
   //   const theTitle = await pageB.title()
   // 	expect(theTitle).toBe(`Suffragium`)
   // })
-
+  //
   // test(`can login at B`, async ()=>{
   //   await pageB.type(`input#email`,`ww@ww.ww`)
   //   await pageB.type(`input#password`,`wwwwww`)
@@ -79,7 +79,7 @@ describe(`Suffragium`,()=>{
 
   // let pollLink  // the link will be found in browserA, and used to navigate in
   //               // broswerB
-
+  //
   // test(`pageA can navigate to own poll`, async ()=> {
   //   await pageA.$$eval(`p.question-own-poll`, arr => {
   //     starWarsLink = arr.filter(p => p.textContent.includes(`Star Wars`))[0]
@@ -91,7 +91,7 @@ describe(`Suffragium`,()=>{
   //   })
   //   expect(pollLink).toBeDefined()
   // })
-
+  //
   // test(`pageB navigates to poll url`, async () => {
   //   await pageB.goto(pollLink)  // use the URL found in the other browser (previous test)
   //   await pageB.waitFor(`button.voted`, {timeout: 2000})
@@ -99,6 +99,8 @@ describe(`Suffragium`,()=>{
   //   // if the button does not appear in two seconds. That will make
   //   // this test fail.
   // })
+ 
+
 
   // async function getFirstOptionVotes(page) {
   //   // Get the value in the second table cell in first row of the results
@@ -108,13 +110,13 @@ describe(`Suffragium`,()=>{
   //     (el) => el.textContent
   //   ))
   // }
-
+  // 
   // test(`poll scores are equal in both browsers`, async () => {
   //   const firstOptionVotesA = await getFirstOptionVotes(pageA)
   //   const firstOptionVotesB = await getFirstOptionVotes(pageB)
   //   expect(firstOptionVotesA).toEqual(firstOptionVotesB)
   // })
-
+  // 
   // test(`votes are updated in both browsers`, async ()=>{
   //   const firstOptionVotesA_before = await getFirstOptionVotes(pageA)
   //   // Clicking on the radio-button itself did not work. There is a label that
@@ -124,9 +126,9 @@ describe(`Suffragium`,()=>{
   //   await pageA.click(`div.container-question button.voted`)
   //   const firstOptionVotesA_after = await getFirstOptionVotes(pageA)
   //   expect(firstOptionVotesA_after).toBe(firstOptionVotesA_before+1) // was the score increased?
-
+  //
   //   pageB.waitFor(200)  // Allow 200 ms for update to arrive at other browser.
   //   const firstOptionVotesB_after = await getFirstOptionVotes(pageB)
-  //   expect(firstOptionVotesA_after).toBe(firstOptionVotesA_before+1) // was the score also updated in other browser?
+  //   expect(firstOptionVotesB_after).toBe(firstOptionVotesA_before+1) // was the score also updated in other browser?
   // })
 })
