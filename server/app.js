@@ -30,7 +30,8 @@ const pathPublic = path.join(process.cwd(), 'client')
 const secretKey = process.env.SECRETKEY || 'secretkey'
 
 mongoose.Promise = Promise
-mongoose.connect(urlDb, { useMongoClient: true })
+// mongoose.connect(urlDb, { useMongoClient: true })
+mongoose.connect(urlDb, {  })
 
 app.use(express.static(pathPublic))
 
@@ -61,4 +62,4 @@ app.use(passport.initialize())
 app.use(authRoutes)
 app.use(routes)
 
-console.log(`Listening on PORT ${PORT}`)
+console.log(`App running.\nOpen app in browser at: http://localhost:${PORT}`)
