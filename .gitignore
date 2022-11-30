@@ -63,3 +63,5 @@ typings/
 client/bundle\.js
 
 \.DS_Store
+
+.vscode/
